@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap-datetimepicker-master/css/bootstrap-datetimepicker.min.css">
+    <title>挑战工场</title>
+</head>
+<body>
+<div class="head">
+    <img src="../images/logo.png" alt="" class="logo">
+    <div class="tab">
+        <ul>
+            <li><a href="#" class="index">首页</a></li>
+            <li><a href="#" class="idea">梦工场</a></li>
+            <li><a href="#" class="light">轻工场</a></li>
+            <li><a href="#" class="scope">规模工场</a></li>
+            <li><a href="#" class="challenge">挑战工场</a></li>
+            <li><a href="#" class="quit"></a></li>
+        </ul>
+    </div>
+</div>
+
+    <!-- 只有是企业才可以显示发布 -->
+    <div class="window">
+        <h3>挑战工场的发布</h3>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">问题名称</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3" name="questionName">
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">领域</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3" name="area">
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">奖励</span>
+            <input type="number" class="form-control" placeholder="" aria-describedby="sizing-addon3" name="award">
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">截止日期</span>
+            <!--<input type="date" class="" placeholder="" aria-describedby="sizing-addon3" name="">-->
+            <input class="form-control" type="text" id="endDate"/>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">问题概述</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3" name="questionSummary">
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">问题详述</span>
+            <input class="form-control" ria-describedby="sizing-addon3" name="questionDetail"></input>
+        </div>
+        <div class="input-group input-group-sm">
+            <span class="input-group-addon" id="sizing-addon3">交付标准</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon3" name="standard">
+        </div>
+        <button type="button" class="btn btn-default">取消</button>
+        <button type="button" class="btn btn-success">提交</button>
+    </div>
+    <!-- 只有不是企业才可以显示发布 -->
+    <div class="question" style="display: none;">
+        <h3>挑战工场的问题</h3>
+        <!--<div class="list">-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon">问题名称</span>-->
+                <!--<span class="form-control questionName" aria-describedby="sizing-addon3">问题名称问题名称问题名称问题名称问题名称问题名称</span>-->
+            <!--</div>-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon">领域</span>-->
+                <!--<span class="form-control area">领域领域领域领域领域领域领域</span>-->
+            <!--</div>-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon">奖励</span>-->
+                <!--<span class="form-control award">奖励奖励奖励奖励奖励奖励奖励奖励奖励</span>-->
+            <!--</div>-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon">截止日期</span>-->
+                <!--<span class="form-control endDate">截止日期截止日期截止日期截止日期截止日期</span>-->
+            <!--</div>-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon">问题概述</span>-->
+                <!--<div class="form-control questionSummary">问题概述问题概述问题概述问题概述问题概述问题概述问题概述</div>-->
+            <!--</div>-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon">问题详述</span>-->
+                <!--<div class="questionDetail">问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述问题详述</div>-->
+            <!--</div>-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon" id="sizing-addon3">交付标准</span>-->
+                <!--<span class="form-control standard">交付标准交付标准交付标准交付标准交付标准</span>-->
+            <!--</div>-->
+            <!--<div class="input-group input-group-sm">-->
+                <!--<span class="input-group-addon" id="sizing-addon3">问题附件</span>-->
+                <!--<a href="#" class="form-control appendix">附件下载</a>-->
+            <!--</div>-->
+            <!--<span>你的回答：</span><textarea class="answer" cols="100" rows="10" data-id="123"></textarea>-->
+            <!--<button type="button" class="btn">提交</button>-->
+        <!--</div>-->
+
+    </div>
+<script src="../jquery.js"></script>
+<script src="../bootstrap/js/bootstrap.js"></script>
+<script src="../bootstrap-datetimepicker-master/js/bootstrap-datetimepicker.js"></script>
+<script>
+    $("#endDate").datetimepicker({
+        format: 'yyyy-mm-dd hh:ii:ss',
+        autoclose: 1//选择后自动关闭
+    });
+</script>
+</body>
+</html>

@@ -19,6 +19,9 @@ $(function () {
     $(".login").click(function(){
         location.href="../login/index.html";
     });
+    $(".personalCenter").click(function(){
+        location.href="../personalCenter/index.html";
+    })
     // var url = location.search; //获取url中"?"符后的字串
     // var theRequest = new Object();
     // if (url.indexOf("?") != -1) {

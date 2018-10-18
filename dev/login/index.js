@@ -22,7 +22,19 @@ $(function () {
     $(".login").click(function(){
         location.href="../login/index.html";
     });
+    $(".personalCenter").click(function(){
+        location.href="../personalCenter/index.html";
+    })
+    //回车事件(没用)
+    // $("input[name='password']").keypress(function(event){
+    //     if(event.keyCode == 13){
+    //         getLogin();
+    //     }
+    // })
     $(".button").click(function(){
+        getLogin();
+    })
+    function getLogin(){
         var user_name=$("input[name='user_name']").val();
         var password=$("input[name='password']").val();
         if(user_name==null||user_name==""){
@@ -54,7 +66,7 @@ $(function () {
                 alert(res.msg);
             }
         })
-    })
+    }
     $(".left a").click(function(){
         location.href="../register/index.html"
     })

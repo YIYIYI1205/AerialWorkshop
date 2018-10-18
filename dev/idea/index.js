@@ -19,6 +19,9 @@ $(function(){
     $(".login").click(function(){
         location.href="../login/index.html";
     });
+    $(".personalCenter").click(function(){
+        location.href="../personalCenter/index.html";
+    })
     var width=window.screen.width;
     if(width<700){
         console.log(width);
@@ -129,7 +132,7 @@ $(function(){
                 loginId:loginId,
                 token:token
             }
-            var url="http://dreamcloud.work/dreamCloud/sayDream";
+            var url="http://dreamcloud.work//sayDream";
             $.post(url,datas,function(res){
                 console.log(res)
                 if(res.code==1000){

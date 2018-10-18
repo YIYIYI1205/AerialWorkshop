@@ -26,6 +26,9 @@ $(function(){
     $(".question").click(function(){
         location.href="../question/index.html";
     });
+    $(".personalCenter").click(function(){
+        location.href="../personalCenter/index.html";
+    })
     var storage=window.localStorage;
     $(".quit").click(function(){
         //点击退出清除缓存并且跳转页面到登录

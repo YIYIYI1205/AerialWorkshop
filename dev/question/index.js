@@ -19,12 +19,16 @@ $(function () {
     $(".login").click(function(){
         location.href="../login/index.html";
     });
+    $(".personalCenter").click(function(){
+        location.href="../personalCenter/index.html";
+    })
     var storage=window.localStorage;
     $(".quit").click(function(){
         //点击退出清除缓存并且跳转页面到登录
         storage.clear();
         location.href="../login/index.html";
     });
+
     if(storage.length==0){
         var loginId="";
     }else{
@@ -35,6 +39,7 @@ $(function () {
         var type=storage.type;
         var quit=user_name+"|退出";
         $( ".quit").parent().attr("style","display:block;");
+        $( ".personalCenter").parent().attr("style","display:block;");
         $( ".login").parent().attr("style","display:none;");
         $( ".quit").text(quit);
     }

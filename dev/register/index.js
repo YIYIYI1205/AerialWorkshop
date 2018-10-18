@@ -19,6 +19,9 @@ $(function () {
     $(".login").click(function(){
         location.href="../login/index.html";
     });
+    $(".personalCenter").click(function(){
+        location.href="../personalCenter/index.html";
+    })
     //默认个人
     var type="personal";
     $("#personal").click(function(){

@@ -19,12 +19,16 @@ $(function () {
     $(".login").click(function(){
         location.href="../login/index.html";
     });
+    $(".personalCenter").click(function(){
+        location.href="../personalCenter/index.html";
+    })
     var storage=window.localStorage;
     $(".quit").click(function(){
         //点击退出清除缓存并且跳转页面到登录
         storage.clear();
         location.href="../login/index.html";
     });
+
     if(storage.length==0){
         alert("请登录");
         location.href="../login/index.html";
@@ -48,10 +52,16 @@ $(function () {
         $(".question").attr("style","display:block;");
         $(".window").attr("style","display:none;");
         //从后台获取数据
+        getLost()
+        
+    };
+    function getLost(){
         var urlGet="http://dreamcloud.work/user/challenge/list";
         $.get(urlGet,data,function(res){
             console.log(res);
-
+            if(res.length==0){
+                alert("暂时没有数据");
+            }
             for(var i =0;i<res.length;i++){
                 var list=$('<div class="list"></div>');
                 var questionName='<div class="input-group input-group-sm"><span class="input-group-addon">问题名称</span><span class="form-control questionName" aria-describedby="sizing-addon3">'+res[i].questionName+'</span></div>';
@@ -72,30 +82,37 @@ $(function () {
                 list.append($(questionDetail));
                 var standard='<div class="input-group input-group-sm"><span class="input-group-addon" id="sizing-addon3">交付标准</span><span class="form-control standard">'+res[i].standard+'</span></div>';
                 list.append($(standard));
-                var appendix='<div class="input-group input-group-sm"><span class="input-group-addon" id="sizing-addon3">问题附件</span><a href="#" class="form-control appendix">附件下载</a></div>';
+                var appendix='<div class="input-group input-group-sm"><span class="input-group-addon" id="sizing-addon3">问题附件</span><a href="http://dreamcloud.work'+res[i].appendix+'" class="form-control appendix">附件下载</a></div>';
                 list.append($(appendix));
-                var answer='<span>你的回答：</span><textarea class="answer" cols="100" rows="10" data-id="123"></textarea>';
+                var answer='<span>你的回答：</span><textarea class="answer" cols="100" rows="10" data-id="'+res[i].id+'"></textarea>';
                 list.append($(answer));
                 list.append($('<button type="button" class="btn">提交</button>'));
-                console.log(list);
                 $(".question").append(list);
+                //点击提交后，只提交回答和该问题的id和用户id
+                if(i==res.length-1){
+                    $(".btn").click(function(){
+                        var answer=$(this).prev().val();
+                        var questionId=$(this).prev().data('id');
+                        console.log(questionId);
+                        var datas={
+                            answer:answer,
+                            questionId:questionId,
+                            loginId:loginId,
+                            token:token
+                        }
+                        console.log(datas);
+                        //把数据发送给后台
+                        var url="http://dreamcloud.work/user/challenge/challengeSolve"
+                        $.get(url,datas,function(res){
+                            console.log(res);
+                            alert(res.msg);
+                            getLost();
+                        })
+                    })
+                }
             }
         })
-        //点击提交后，只提交回答和该问题的id和用户id
-        $(".btn").click(function(){
-            var answer=$(this).prev().val();
-            var questionId=$(this).prev().data('id');
-            console.log(questionId);
-            var datas={
-                answer:answer,
-                questionId:questionId,
-                loginId:loginId,
-                token:token
-            }
-            console.log(datas);
-            //把数据发送给后台
-        })
-    };
+    }    
     //登录类型是企业用户时，直接显示企业页面，点击提交后向后台发送数据
     if(type=='company'){
         console.log("123");

@@ -54,6 +54,7 @@ $(function(){
         var user_name=storage.user_name;
         var type=storage.type;
         var quit=user_name+"|退出";
+        $( ".personalCenter").parent().attr("style","display:block;");
         $( ".quit").parent().attr("style","display:block;");
         $( ".login").parent().attr("style","display:none;");
        $( ".quit").text(quit);

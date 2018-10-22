@@ -41,8 +41,6 @@ $(function () {
         var quit=user_name+"|退出";
         $(".quit").text(quit);
     }
-
-
     //登录类型是个人用户时，先向后台请求数据，显示到页面上，点击提交后，只向后台提交该问题（附带问题id）的答案
     if(type=='personal'){
         var data={
@@ -59,56 +57,51 @@ $(function () {
         var urlGet="http://dreamcloud.work/user/challenge/list";
         $.get(urlGet,data,function(res){
             console.log(res);
-            if(res.length==0){
-                alert("暂时没有数据");
-            }
-            for(var i =0;i<res.length;i++){
-                var list=$('<div class="list"></div>');
-                var questionName='<div class="input-group input-group-sm"><span class="input-group-addon">问题名称</span><span class="form-control questionName" aria-describedby="sizing-addon3">'+res[i].questionName+'</span></div>';
-                list.append($(questionName));
-                var area='<div class="input-group input-group-sm"><span class="input-group-addon">领域</span> <span class="form-control area">'+res[i].area+'</span></div>';
-                list.append($(area));
-                var award='<div class="input-group input-group-sm"><span class="input-group-addon">奖励</span><span class="form-control award">'+res[i].award+'</span></div>';
-                list.append($(award));
-                // 根据毫秒数构建 Date 对象
-                var date = new Date(res[i].endDate);
-                // 格式化日期
-                dateTime = date.toLocaleString();
-                var endDate='<div class="input-group input-group-sm"><span class="input-group-addon">截止日期</span><span class="form-control endDate">'+dateTime+'</span></div>';
-                list.append($(endDate));
-                var questionSummary='<div class="input-group input-group-sm"><span class="input-group-addon">问题概述</span><div class="form-control questionSummary">'+res[i].questionSummary+'</span></div>';
-                list.append($(questionSummary));
-                var questionDetail='<div class="input-group input-group-sm"><span class="input-group-addon">问题详述</span><div class="questionDetail">'+res[i].questionDetail+'</span></div>';
-                list.append($(questionDetail));
-                var standard='<div class="input-group input-group-sm"><span class="input-group-addon" id="sizing-addon3">交付标准</span><span class="form-control standard">'+res[i].standard+'</span></div>';
-                list.append($(standard));
-                var appendix='<div class="input-group input-group-sm"><span class="input-group-addon" id="sizing-addon3">问题附件</span><a href="http://dreamcloud.work'+res[i].appendix+'" class="form-control appendix">附件下载</a></div>';
-                list.append($(appendix));
-                var answer='<span>你的回答：</span><textarea class="answer" cols="100" rows="10" data-id="'+res[i].id+'"></textarea>';
-                list.append($(answer));
-                list.append($('<button type="button" class="btn">提交</button>'));
-                $(".question").append(list);
-                //点击提交后，只提交回答和该问题的id和用户id
-                if(i==res.length-1){
-                    $(".btn").click(function(){
-                        var answer=$(this).prev().val();
-                        var questionId=$(this).prev().data('id');
-                        console.log(questionId);
-                        var datas={
-                            answer:answer,
-                            questionId:questionId,
-                            loginId:loginId,
-                            token:token
-                        }
-                        console.log(datas);
-                        //把数据发送给后台
-                        var url="http://dreamcloud.work/user/challenge/challengeSolve"
-                        $.get(url,datas,function(res){
-                            console.log(res);
-                            alert(res.msg);
-                            getLost();
-                        })
+            if(res.code==1024){
+                alert(res.msg)
+                location.href="../login/index.html"
+            }else{
+                if(res.length==0){
+                    alert("暂时没有数据");
+                }
+                res=res.reverse();
+                for(var i =0;i<res.length;i++){
+                    var list=$('<div class="list jump"></div>');
+                    var left='<div class="left"><img src="'+res[i].img+'"></div>';
+                    var date = new Date(res[i].endDate);
+                    //     // 格式化日期
+                    var dateTime = date.toLocaleString();
+                    var center='<div class="center"><div class="title">'+res[i].questionName+'</div><div class="endTime">截止时间：'+dateTime+'</div><div class="area">领域：'+res[i].area+'</div><div class="detail">问题概述：'+res[i].questionSummary+'</div></div>';
+                    var right='<div class="right"><div class="award">'+res[i].award+'￥</div><a href="#" class="showMore" data-id="'+i+'">查看更多</a>'
+                    $(".lists").append(list);
+                    list.append($(left));
+                    list.append($(center));
+                    list.append($(right));
+                    $(".showMore").click(function(){
+                            var j=$(this).data("id");
+                            console.log($(this).data("id"));
+                            jump(j);
+                    });
+                    $(".jump").click(function(){
+                        var j=$($(this).children(".right")).children("a").data("id");
+                        console.log(j);
+                        jump(j);
                     })
+                    function jump(j){
+                        storage.appendix=res[j].appendix;
+                        storage.area=res[j].area;
+                        storage.award=res[j].award;
+                        storage.endDate=res[j].endDate;
+                        storage.id=res[j].id;
+                        storage.questionDetail=res[j].questionDetail;
+                        storage.questionName=res[j].questionName;
+                        storage.questionSummary=res[j].questionSummary;
+                        storage.standard=res[j].standard;
+                        storage.submitDate=res[j].submitDate;
+                        storage.submitPerson=res[j].user.user_name;
+                        storage.light=false;
+                        location.href="../detail/index.html";
+                    }
                 }
             }
         })
@@ -126,6 +119,7 @@ $(function () {
             var questionSummary=$("input[name='questionSummary']").val();
             var questionDetail=$("input[name='questionDetail']").val();
             var standard=$("input[name='standard']").val();
+            var img=$("input[name='img']:checked").val();
             if(questionName==""||questionName==null){
                 alert("问题名称不能为空");
                 return;
@@ -163,6 +157,7 @@ $(function () {
                 questionSummary:questionSummary,
                 questionDetail:questionDetail,
                 standard:standard,
+                img:img,
                 loginId:loginId,
                 token:token
             };

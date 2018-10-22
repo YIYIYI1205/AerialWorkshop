@@ -45,7 +45,7 @@ var config={
     ]
 };
 //只有这样循环才可以在每个index文件中只引入对应的js文件
-var pages=['index','login','register','challenge','idea','light','scope','resolve','question','email','personalCenter'];
+var pages=['index','login','register','challenge','idea','light','scope','resolve','question','email','personalCenter','detail'];
 pages.forEach(function(page){
     //和下面一行一个意思
     // config.entry[page] = ['./dev/', '/index.js'].join(page);
